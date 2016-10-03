@@ -276,8 +276,7 @@ public abstract class DelegationTokenAuthenticationHandler
             if (map != null) {
               response.setContentType(MediaType.APPLICATION_JSON);
               Writer writer = response.getWriter();
-              ObjectMapper jsonMapper = new ObjectMapper();
-              jsonMapper.writeValue(writer, map);
+              writeJSON(writer, map)
               writer.write(ENTER);
               writer.flush();
             }
@@ -294,6 +293,10 @@ public abstract class DelegationTokenAuthenticationHandler
     }
     return requestContinues;
   }
+   protected writeJSON(Writer w, Map json){
+         ObjectMapper jsonMapper = new ObjectMapper();
+          jsonMapper.writeValue(writer, map);
+   }
 
   @SuppressWarnings("unchecked")
   private static Map delegationTokenToJSON(Token token) throws IOException {
